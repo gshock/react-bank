@@ -6,26 +6,12 @@ import {render} from 'react-dom';
 import BankBalanceStore from './BankBalanceStore';
 import BankActions from './BankActions';
 
+import {Container} from 'flux/utils';
+
 class App extends Component {
   constructor() {
     super(...arguments);
     BankActions.createAccount();
-    this.state = {
-      balance: BankBalanceStore.getState()
-    }
-  }
-
-  componentDidMount() {
-    this.storeSubscription = BankBalanceStore.addListener(
-      data => this.handleStoreChange(data));
-  }
-
-  componentWillUnmount() {
-    this.storeSubscription.remove();
-  }
-
-  handleStoreChange() {
-    this.setState({ balance: BankBalanceStore.getState() });
   }
 
   deposit() {
@@ -52,7 +38,11 @@ class App extends Component {
       </div>
     );
   }
-
 }
 
-export default App
+App.getStores = () => ([BankBalanceStore]);
+App.calculateState = (prevState) => ({balance: BankBalanceStore.getState()});
+
+const AppContainer = Container.create(App);
+
+export default AppContainer
