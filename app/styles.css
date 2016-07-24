@@ -33,10 +33,10 @@ h2 {
 
 .atm input {
   font-size: 25px;
-  width: 180px
+  width: 188px
 }
 
-button.atm {
-  margin: 5px;
+.atm button {
+  margin: 2px;
   padding: 20px;
 }
