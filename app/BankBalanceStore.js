@@ -1,28 +1,22 @@
 import AppDispatcher from './AppDispatcher';
 import bankConstants from './constants';
-import {Store} from 'flux/utils';
+import {ReduceStore} from 'flux/utils';
 
-let balance = 0;
+class BankBalanceStore extends ReduceStore {
+    getInitialState() {
+        return 0;
+    }
 
-class BankBalanceStore extends Store {
-    getState() {
-        return balance;
-    } 
-
-    __onDispatch(action) {
+    reduce(state, action) {
         switch (action.type) {
             case bankConstants.CREATED_ACCOUNT:
-                balance = 0;
-                this.__emitChange();
-                break;
+                return 0;
             case bankConstants.DEPOSITED_INTO_ACCOUNT:
-                balance = balance + action.amount;
-                this.__emitChange();
-                break;
+                return state + action.amount;
             case bankConstants.WITHDREW_FROM_ACCOUNT:
-                balance = balance - action.amount;
-                this.__emitChange();
-                break;
+                return state - action.amount;
+            default:
+                return state;
         }
     }
 }
