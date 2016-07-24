@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import styles from './App.css';
+import {render} from 'react-dom';
+//import styles from './App.css';
+//import './app.css';
 
-import { render } from 'react-dom';
 import BankBalanceStore from './BankBalanceStore';
 import BankActions from './BankActions';
 
